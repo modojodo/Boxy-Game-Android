@@ -62,40 +62,46 @@ class Boxy {
   }
   void jump() {
 
-//    Vec2 boxPos = box2d.getBodyPixelCoord(body);
+    Vec2 boxPos = box2d.getBodyPixelCoord(body);
     //left  side screen control
-    //    if (mouseX<halfWidth) {
-    //      if (boxPos.y-90< halfWidth) {
-    //        float ylimit=halfWidth-boxPos.y;
-    //        jumpLeft.y=ylimit;
-    //        body.setLinearVelocity(jumpLeft);
-    //      } else {
-    //        jumpLeft.y=90;
-    //        body.setLinearVelocity(jumpLeft);
-    //      }
-    //    } else  if (mouseX>halfWidth) {
-    //
-    //      if (boxPos.y-90< halfWidth) {
-    //        float ylimit=halfWidth-boxPos.y;
-    //        jumpRight.y=ylimit;
-    //        body.setLinearVelocity(jumpRight);
-    //      } else {
-    //        jumpRight.y=90;
-    //        body.setLinearVelocity(jumpRight);
-    //      }
-    //    }
+       if (mouseX<halfWidth) {
+         if (boxPos.y-90< halfHeight) {
+           float ylimit=halfWidth-boxPos.y;
+           jumpLeft.y=ylimit;
+           body.setLinearVelocity(jumpLeft);
+         } else {
+           jumpLeft.y=90;
+           body.setLinearVelocity(jumpLeft);
+         }
+       } else  if (mouseX>halfWidth) {
+    
+         if (boxPos.y-90< halfHeight) {
+           float ylimit=halfWidth-boxPos.y;
+           jumpRight.y=ylimit;
+           body.setLinearVelocity(jumpRight);
+         } else {
+           jumpRight.y=90;
+           body.setLinearVelocity(jumpRight);
+         }
+       }
 
 
-
-
-
-    if (mouseX>  halfWidth) {
-
-      body.setLinearVelocity(jumpRight);
-    } else if (mouseX< halfWidth) {
-
-      body.setLinearVelocity(jumpLeft);
-    }
+//    if (boxPos.y <= halfHeight) {
+//      jumpRight.y=0;
+//      jumpLeft.y=0;
+//    } else {
+//      jumpRight.y=90;
+//      jumpLeft.y=90;
+//    }
+//
+//
+//    if (mouseX>  halfWidth) {
+//
+//      body.setLinearVelocity(jumpRight);
+//    } else if (mouseX< halfWidth) {
+//
+//      body.setLinearVelocity(jumpLeft);
+//    }
   }
 }
 
