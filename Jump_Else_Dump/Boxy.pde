@@ -63,8 +63,10 @@ class Boxy {
 
     Vec2 boxPos = box2d.getBodyPixelCoord(body);
     if (boxPos.y< halfScreenHeight) {
+      println("Shouldn't jump");
       jumpRight.y=0;
       jumpLeft.y=0;
+       println("jumpRight.y: "+ jumpRight.y+" jumpLeft.y: "+ jumpLeft.y);
       if (mouseX>  halfScreenWidth) {
 
         body.setLinearVelocity(jumpRight);
@@ -73,8 +75,10 @@ class Boxy {
         body.setLinearVelocity(jumpLeft);
       }
     } else {
+      println("Should jump");
       jumpRight.y=90;
       jumpLeft.y=90;
+       println("jumpRight.y: "+ jumpRight.y+" jumpLeft.y: "+ jumpLeft.y);
       if (mouseX>halfScreenWidth) {
 
         body.setLinearVelocity(jumpRight);
