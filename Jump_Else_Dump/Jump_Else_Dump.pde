@@ -24,15 +24,17 @@ void setup() {
 void draw() {
 
   background(255);
+  
   box2d.step();
   fill(0);
  
-
+//  box.checkBoxPos();
   box.display();
 }
 
 void mousePressed() {
   box.jump();
+  println("mousePressed called");
 }
 
 
