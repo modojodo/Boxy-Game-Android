@@ -5,8 +5,8 @@ class Boxy {
   Body body;
   Vec2 jumpRight;
   Vec2 jumpLeft;
-  int halfScreenWidth= width/2;
-  int halfScreenHeight =height/2;
+  int halfWidth= width/2;
+  int halfHeight =height/2;
 
   public Boxy( float _x, float _y) {
     w=40;
@@ -21,6 +21,7 @@ class Boxy {
     bd.type=BodyType.DYNAMIC;
     body=box2d.createBody(bd);
     PolygonShape ps = new PolygonShape();
+
     //[full] Box2D considers the width and height of a rectangle to be the distance from the center to the edge (so half of what we normally think of as width or height).
     float box2dW = box2d.scalarPixelsToWorld(w);
     float box2dH = box2d.scalarPixelsToWorld(h);
@@ -61,31 +62,39 @@ class Boxy {
   }
   void jump() {
 
-    Vec2 boxPos = box2d.getBodyPixelCoord(body);
-    if (boxPos.y< halfScreenHeight) {
-      println("Shouldn't jump");
-      jumpRight.y=0;
-      jumpLeft.y=0;
-       println("jumpRight.y: "+ jumpRight.y+" jumpLeft.y: "+ jumpLeft.y);
-      if (mouseX>  halfScreenWidth) {
+//    Vec2 boxPos = box2d.getBodyPixelCoord(body);
+    //left  side screen control
+    //    if (mouseX<halfWidth) {
+    //      if (boxPos.y-90< halfWidth) {
+    //        float ylimit=halfWidth-boxPos.y;
+    //        jumpLeft.y=ylimit;
+    //        body.setLinearVelocity(jumpLeft);
+    //      } else {
+    //        jumpLeft.y=90;
+    //        body.setLinearVelocity(jumpLeft);
+    //      }
+    //    } else  if (mouseX>halfWidth) {
+    //
+    //      if (boxPos.y-90< halfWidth) {
+    //        float ylimit=halfWidth-boxPos.y;
+    //        jumpRight.y=ylimit;
+    //        body.setLinearVelocity(jumpRight);
+    //      } else {
+    //        jumpRight.y=90;
+    //        body.setLinearVelocity(jumpRight);
+    //      }
+    //    }
 
-        body.setLinearVelocity(jumpRight);
-      } else if (mouseX< halfScreenWidth) {
 
-        body.setLinearVelocity(jumpLeft);
-      }
-    } else {
-      println("Should jump");
-      jumpRight.y=90;
-      jumpLeft.y=90;
-       println("jumpRight.y: "+ jumpRight.y+" jumpLeft.y: "+ jumpLeft.y);
-      if (mouseX>halfScreenWidth) {
 
-        body.setLinearVelocity(jumpRight);
-      } else if (mouseX<halfScreenWidth) {
 
-        body.setLinearVelocity(jumpLeft);
-      }
+
+    if (mouseX>  halfWidth) {
+
+      body.setLinearVelocity(jumpRight);
+    } else if (mouseX< halfWidth) {
+
+      body.setLinearVelocity(jumpLeft);
     }
   }
 }

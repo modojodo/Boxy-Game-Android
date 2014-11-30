@@ -31,7 +31,6 @@ void draw() {
 }
 
 void mousePressed() {
-  //background(223,250,144);
   box.jump();
 }
 
