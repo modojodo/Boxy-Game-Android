@@ -7,7 +7,7 @@ Box2DProcessing box2d;
 Boxy box;
 
 void setup() {
-//  size(600, 600);
+  size(600, 600);
   noStroke();
   frameRate(100);
 
@@ -28,7 +28,7 @@ void draw() {
   box2d.step();
   fill(0);
  
-//  box.checkBoxPos();
+  box.checkBoxPos();
   box.display();
 }
 

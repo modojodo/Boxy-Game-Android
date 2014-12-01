@@ -7,6 +7,8 @@ class Boxy {
   Vec2 jumpLeft;
   int halfWidth= width/2;
   int halfHeight =height/2;
+  int yJump=10;
+  int xJump=90;
 
   public Boxy( float _x, float _y) {
     w=40;
@@ -40,8 +42,8 @@ class Boxy {
     body.createFixture(fd);
     //    body.setLinearVelocity(new Vec2(100, 0));
     //    body.setAngularVelocity(12);
-    jumpRight= new Vec2(10, 90);
-    jumpLeft= new Vec2(-10, 90);
+    jumpRight= new Vec2(xJump, yJump);
+    jumpLeft= new Vec2(-xJump, yJump);
   }
 
   void display() {
@@ -63,13 +65,19 @@ class Boxy {
 
   void checkBoxPos() {
     Vec2 boxPos = box2d.getBodyPixelCoord(body);
-    if (boxPos.y-90< halfHeight) {
-      float ylimit=halfWidth-boxPos.y;
-      jumpLeft.y=ylimit;
-      jumpRight.y=ylimit;
+    //
+    //    if (boxPos.y >= halfHeight && boxPos.y <=halfHeight+20) {
+    //      jumpRight.y=0;
+    //      jumpLeft.y=0;
+    //    } else 
+
+    if (boxPos.y>=halfHeight+20) {
+      jumpRight.y=yJump;
+      jumpLeft.y=yJump;
     } else {
-      jumpLeft.y=90;
-      jumpRight.y=90;
+
+      jumpRight.y=0;
+      //      jumpLeft.y=0;
     }
   }
   void jump() {
