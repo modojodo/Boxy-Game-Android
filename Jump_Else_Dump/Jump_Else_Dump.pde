@@ -16,7 +16,7 @@ void setup() {
   box2d= new Box2DProcessing(this);
   box2d.createWorld();
   box2d.setGravity(0, -150);
-  box = new Boxy(width/2, height/2);
+  box = new Boxy(width/2, height/2-100);
 }
 
 
@@ -24,11 +24,9 @@ void setup() {
 void draw() {
 
   background(255);
-  
+
   box2d.step();
   fill(0);
- 
-  box.checkBoxPos();
   box.display();
 }
 
@@ -36,5 +34,4 @@ void mousePressed() {
   box.jump();
   println("mousePressed called");
 }
-
 

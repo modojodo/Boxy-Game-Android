@@ -1,5 +1,6 @@
 class Boxy {
-
+  final float Y_VELOCITY= 0.10*height;
+  final float X_VELOCITY=10;
   float w, h;
   float x, y;
   Body body;
@@ -7,8 +8,8 @@ class Boxy {
   Vec2 jumpLeft;
   int halfWidth= width/2;
   int halfHeight =height/2;
-  int yJump=10;
-  int xJump=90;
+  float yJump=Y_VELOCITY;
+  float xJump=X_VELOCITY;
 
   public Boxy( float _x, float _y) {
     w=40;
@@ -63,63 +64,23 @@ class Boxy {
     box2d.destroyBody(body);
   }
 
-  void checkBoxPos() {
-    Vec2 boxPos = box2d.getBodyPixelCoord(body);
-    //
-    //    if (boxPos.y >= halfHeight && boxPos.y <=halfHeight+20) {
-    //      jumpRight.y=0;
-    //      jumpLeft.y=0;
-    //    } else 
-
-    if (boxPos.y>=halfHeight+20) {
-      jumpRight.y=yJump;
-      jumpLeft.y=yJump;
-    } else {
-
-      jumpRight.y=0;
-      //      jumpLeft.y=0;
-    }
-  }
   void jump() {
+    Vec2 boxPos = box2d.getBodyPixelCoord(body);
+    if (boxPos.y<halfHeight) {
+      return;
+    } else if (Y_VELOCITY>Math.abs(boxPos.y-halfHeight)) {
+      float x = Math.abs(boxPos.y-halfHeight);
+      yJump=x;
+    } else {
+      yJump=Y_VELOCITY;
+    }
 
 
-    //left  side screen control
-    //       if (mouseX<halfWidth) {
-    //         if (boxPos.y-90< ) {
-    //           float ylimit=halfWidth-boxPos.y;
-    //           jumpLeft.y=ylimit;
-    //           body.setLinearVelocity(jumpLeft);
-    //         } else {
-    //           jumpLeft.y=90;
-    //           body.setLinearVelocity(jumpLeft);
-    //         }
-    //       } else  if (mouseX>halfWidth) {
-    //    
-    //         if (boxPos.y-90< halfHeight) {
-    //           float ylimit=halfWidth-boxPos.y;
-    //           jumpRight.y=ylimit;
-    //           body.setLinearVelocity(jumpRight);
-    //         } else {
-    //           jumpRight.y=90;
-    //           body.setLinearVelocity(jumpRight);
-    //         }
-    //       }
-
-
-    //    if (boxPos.y <= halfHeight) {
-    //      jumpRight.y=0;
-    //      jumpLeft.y=0;
-    //    } else {
-    //      jumpRight.y=90;
-    //      jumpLeft.y=90;
-    //    }
-    //
-    //
     if (mouseX>  halfWidth) {
-
+      jumpRight.y=yJump;
       body.setLinearVelocity(jumpRight);
     } else if (mouseX< halfWidth) {
-
+      jumpLeft.y=yJump;
       body.setLinearVelocity(jumpLeft);
     }
   }
