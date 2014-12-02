@@ -54,8 +54,6 @@ class Boxy {
 
     float a = body.getAngle();
     stroke(0);
-    //    line(width+50, height/2, width-50, height/2);
-
     pushMatrix();
     translate(pos.x, pos.y);
     rotate(-a);
@@ -67,27 +65,15 @@ class Boxy {
   void killBody() {
     box2d.destroyBody(body);
   }
-  void updateBoxyVelocity() {
-    Vec2 boxPos = box2d.getBodyPixelCoord(body);
-    if (Y_VELOCITY>Math.abs((boxPos.y-h)-halfHeight)) {
-      float x = Math.abs(boxPos.y-halfHeight)/60;
-      yJump=x;
-      jumpRight.y=yJump;
-      jumpLeft.y=yJump;
-    } else {
-      yJump=Y_VELOCITY;
-      jumpRight.y=yJump;
-      jumpLeft.y=yJump;
-    }
-  }
+
   void jump() {
     Vec2 boxPos = box2d.getBodyPixelCoord(body);  
 
     if (boxPos.y<halfHeight) {
       return;
     }
-    if (Y_VELOCITY>=Math.abs((boxPos.y-h)-halfHeight)) {
-      float x = Math.abs((boxPos.y-h)-halfHeight);
+    if (Y_VELOCITY>=Math.abs((boxPos.y-h-w)-halfHeight)) {
+      float x = Math.abs((boxPos.y-h-w)-halfHeight);
       yJump=x;      
       jumpRight.y=yJump;
       jumpLeft.y=yJump;

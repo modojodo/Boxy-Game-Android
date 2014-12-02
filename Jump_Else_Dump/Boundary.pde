@@ -20,23 +20,18 @@ class Boundary {
 
     FixtureDef fb= new FixtureDef();
     fb.shape= bs;
-    fb.friction=0.3;
-    fb.restitution=0.5;
-    fb.density=1;
+    //    fb.friction=0.3;
+    //    fb.restitution=0.5;
+    //    fb.density=1;
 
     boundary.createFixture(fb);
   }
 
   void display() {
     Vec2 boundPos = box2d.getBodyPixelCoord(boundary);
-
-    pushMatrix(); 
-    translate(boundPos.x, boundPos.y);  
     fill(0);   
     rectMode(CENTER);   
-    rect(0, 0, bWidth, bHeight);
-    popMatrix();
+    rect(boundPos.x, boundPos.y, bWidth, bHeight);
   }
 }
-
 
