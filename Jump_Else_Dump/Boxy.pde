@@ -86,28 +86,27 @@ class Boxy {
     if (boxPos.y<halfHeight) {
       return;
     }
-    if (Y_VELOCITY>Math.abs((boxPos.y-h)-halfHeight)) {
-      float x = Math.abs(boxPos.y-halfHeight)/60;
+    if (Y_VELOCITY>=Math.abs((boxPos.y-h)-halfHeight)) {
+      float x = Math.abs(boxPos.y-halfHeight);
       yJump=x;      
+      jumpRight.y=yJump;
+      jumpLeft.y=yJump;
       if (mouseX>  halfWidth) {
-        jumpRight.y=yJump;
         body.setLinearVelocity(jumpRight);
       } else if (mouseX< halfWidth) {
-        jumpLeft.y=yJump;
         body.setLinearVelocity(jumpLeft);
       }
     } else {
       yJump=Y_VELOCITY;      
       jumpLeft.y=yJump;
+      jumpRight.y=yJump;
       if (mouseX>  halfWidth) {
-        jumpRight.y=yJump;
         body.setLinearVelocity(jumpRight);
-      } else if (mouseX< halfWidth) {
-        jumpLeft.y=yJump;
+      } else if (mouseX< halfWidth) {       
         body.setLinearVelocity(jumpLeft);
       }
     }
-    println("jumpRight.y: "+jumpRight.y+"jumpRight.y: "+jumpLeft.y);
+    println("jumpRight.y: "+jumpRight.y+" jumpLeft.y: "+jumpLeft.y);
     println("box position difference with target: "+Math.abs((boxPos.y-h)-halfHeight));
   }
 }
