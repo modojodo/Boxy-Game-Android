@@ -8,10 +8,6 @@ Boxy box;
 
 void setup() {
   size(600, 600);
-  noStroke();
-  frameRate(100);
-
-
   println("The height is"+height);
   box2d= new Box2DProcessing(this);
   box2d.createWorld();
@@ -22,12 +18,16 @@ void setup() {
 
 
 void draw() {
+  line(width+50, height/2, width-50, height/2);
 
   background(255);
-
   box2d.step();
   fill(0);
   box.display();
+  box.updateBoxyVelocity();
+  fill(0);
+
+  //  println(frameRate);
 }
 
 void mousePressed() {

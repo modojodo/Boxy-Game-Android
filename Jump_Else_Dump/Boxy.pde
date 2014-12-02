@@ -1,6 +1,5 @@
 class Boxy {
-  final float Y_VELOCITY= 0.10*height;
-  final float X_VELOCITY=10;
+
   float w, h;
   float x, y;
   Body body;
@@ -8,6 +7,8 @@ class Boxy {
   Vec2 jumpLeft;
   int halfWidth= width/2;
   int halfHeight =height/2;
+  final float Y_VELOCITY= 0.15*halfHeight;
+  final float X_VELOCITY=10;
   float yJump=Y_VELOCITY;
   float xJump=X_VELOCITY;
 
@@ -48,9 +49,12 @@ class Boxy {
   }
 
   void display() {
+
     Vec2 pos = box2d.getBodyPixelCoord(body);
 
     float a = body.getAngle();
+    stroke(0);
+    //    line(width+50, height/2, width-50, height/2);
 
     pushMatrix();
     translate(pos.x, pos.y);
@@ -63,26 +67,48 @@ class Boxy {
   void killBody() {
     box2d.destroyBody(body);
   }
-
-  void jump() {
+  void updateBoxyVelocity() {
     Vec2 boxPos = box2d.getBodyPixelCoord(body);
-    if (boxPos.y<halfHeight) {
-      return;
-    } else if (Y_VELOCITY>Math.abs(boxPos.y-halfHeight)) {
-      float x = Math.abs(boxPos.y-halfHeight);
+    if (Y_VELOCITY>Math.abs((boxPos.y-h)-halfHeight)) {
+      float x = Math.abs(boxPos.y-halfHeight)/60;
       yJump=x;
+      jumpRight.y=yJump;
+      jumpLeft.y=yJump;
     } else {
       yJump=Y_VELOCITY;
-    }
-
-
-    if (mouseX>  halfWidth) {
       jumpRight.y=yJump;
-      body.setLinearVelocity(jumpRight);
-    } else if (mouseX< halfWidth) {
       jumpLeft.y=yJump;
-      body.setLinearVelocity(jumpLeft);
     }
+  }
+  void jump() {
+    Vec2 boxPos = box2d.getBodyPixelCoord(body);  
+
+    if (boxPos.y<halfHeight) {
+      return;
+    }
+    if (Y_VELOCITY>Math.abs((boxPos.y-h)-halfHeight)) {
+      float x = Math.abs(boxPos.y-halfHeight)/60;
+      yJump=x;      
+      if (mouseX>  halfWidth) {
+        jumpRight.y=yJump;
+        body.setLinearVelocity(jumpRight);
+      } else if (mouseX< halfWidth) {
+        jumpLeft.y=yJump;
+        body.setLinearVelocity(jumpLeft);
+      }
+    } else {
+      yJump=Y_VELOCITY;      
+      jumpLeft.y=yJump;
+      if (mouseX>  halfWidth) {
+        jumpRight.y=yJump;
+        body.setLinearVelocity(jumpRight);
+      } else if (mouseX< halfWidth) {
+        jumpLeft.y=yJump;
+        body.setLinearVelocity(jumpLeft);
+      }
+    }
+    println("jumpRight.y: "+jumpRight.y+"jumpRight.y: "+jumpLeft.y);
+    println("box position difference with target: "+Math.abs((boxPos.y-h)-halfHeight));
   }
 }
 
