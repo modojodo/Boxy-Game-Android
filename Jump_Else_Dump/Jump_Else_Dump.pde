@@ -7,7 +7,7 @@ Box2DProcessing box2d;
 Boxy box;
 
 void setup() {
-  size(600, 600);
+  //  size(600, 600);
   println("The height is"+height);
   box2d= new Box2DProcessing(this);
   box2d.createWorld();

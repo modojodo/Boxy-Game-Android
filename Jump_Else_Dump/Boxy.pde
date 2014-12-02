@@ -87,7 +87,7 @@ class Boxy {
       return;
     }
     if (Y_VELOCITY>=Math.abs((boxPos.y-h)-halfHeight)) {
-      float x = Math.abs(boxPos.y-halfHeight);
+      float x = Math.abs((boxPos.y-h)-halfHeight);
       yJump=x;      
       jumpRight.y=yJump;
       jumpLeft.y=yJump;
