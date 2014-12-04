@@ -1,37 +1,39 @@
 class Boundary {
+  float x, y, w, h;
   Body boundary;
-  float bWidth, bHeight, boundX, boundY;
   Boundary(float _boundX, float _boundY, float _bWidth, float _bHeight) {
-    boundX=_boundX;
-    boundY=_boundY;
-    bWidth=_bWidth;
-    bHeight=_bHeight;
+    w = _bWidth;
+    h = _bHeight;
+    x=_boundX;
+    y=_boundY;
+    // Build body.
+    BodyDef bound = new BodyDef();
+    bound.type = BodyType.STATIC; 
+    bound.position.set(box2d.coordPixelsToWorld(x, y));
 
+    boundary = box2d.createBody(bound);
 
-    BodyDef bo = new BodyDef();
-    bo.type=BodyType.STATIC;
-    bo.position.set(box2d.coordPixelsToWorld(boundX, boundY));
-    boundary= box2d.createBody(bo);
+    // Build shape.
+    PolygonShape bs = new PolygonShape();   
+    float box2dW = box2d.scalarPixelsToWorld(w/2);
+    float box2dH = box2d.scalarPixelsToWorld(h/2);
 
-    PolygonShape bs = new PolygonShape();
-    float w= box2d.scalarPixelsToWorld(bWidth);
-    float h= box2d.scalarPixelsToWorld(bHeight);
-    bs.setAsBox(w, h);
+    bs.setAsBox(box2dW, box2dH);
 
     FixtureDef fb= new FixtureDef();
     fb.shape= bs;
-    //    fb.friction=0.3;
-    //    fb.restitution=0.5;
-    //    fb.density=1;
+    fb.friction=0.3;
+    fb.restitution=0.5;
+    fb.density=1;
 
     boundary.createFixture(fb);
   }
-
-  void display() {
-    Vec2 boundPos = box2d.getBodyPixelCoord(boundary);
-    fill(0);   
-    rectMode(CENTER);   
-    rect(boundPos.x, boundPos.y, bWidth, bHeight);
+  void display() { 
+    Vec2 boxPos= box2d.getBodyPixelCoord(boundary);
+    fill(0);
+    stroke(0);
+    rectMode(CENTER);
+    rect(boxPos.x, boxPos.y, w, h);
   }
-}
+} 
 

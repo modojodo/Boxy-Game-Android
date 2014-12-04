@@ -9,13 +9,14 @@ Boundary leftWall;
 //Boundary rightWall;
 
 void setup() {
-//  size(800, 800);
+  size(600, 600);
   println("The height is"+height);
   box2d= new Box2DProcessing(this);
   box2d.createWorld();
   box2d.setGravity(0, -150);
   box = new Boxy(width/2, height/2-100);
-  leftWall = new Boundary(width-1,height/2,0,height);
+  //  leftWall = new Boundary(50, height/2, 10, height);
+  leftWall = new Boundary(width/2, height/2+200, width-50, 50);
   //  rightWall = new Boundary(width-10, height/2, 0, height);
   //  rightWall = new Boundary(50, height/2-100, 50, 50);
 }
@@ -25,10 +26,9 @@ void setup() {
 void draw() {
   background(255);
   box2d.step();
-  /*    ---------------Left and right wall starts here---------------*/
-  //  rightWall.display();
-  fill(0);
+
   box.display();
+  leftWall.display(); 
   fill(0);
   line(50, height/2, width-50, height/2);
 

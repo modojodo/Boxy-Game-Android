@@ -27,8 +27,8 @@ class Boxy {
     PolygonShape ps = new PolygonShape();
 
     //[full] Box2D considers the width and height of a rectangle to be the distance from the center to the edge (so half of what we normally think of as width or height).
-    float box2dW = box2d.scalarPixelsToWorld(w);
-    float box2dH = box2d.scalarPixelsToWorld(h);
+    float box2dW = box2d.scalarPixelsToWorld(w/2);
+    float box2dH = box2d.scalarPixelsToWorld(h/2);
     //[end]
     ps.setAsBox(box2dW, box2dH);
 
