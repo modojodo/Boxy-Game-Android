@@ -6,7 +6,7 @@ import org.jbox2d.dynamics.*;
 Box2DProcessing box2d;
 Boxy box;
 Boundary leftWall;
-//Boundary rightWall;
+Boundary rightWall;
 
 void setup() {
   size(600, 600);
@@ -16,9 +16,8 @@ void setup() {
   box2d.setGravity(0, -150);
   box = new Boxy(width/2, height/2-100);
   //  leftWall = new Boundary(50, height/2, 10, height);
-  leftWall = new Boundary(width/2, height/2+200, width-50, 50);
-  //  rightWall = new Boundary(width-10, height/2, 0, height);
-  //  rightWall = new Boundary(50, height/2-100, 50, 50);
+  leftWall = new Boundary(width-width-1, height/2, 0, height);
+  rightWall = new Boundary(width, height/2, 0, height);
 }
 
 
