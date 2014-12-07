@@ -15,7 +15,7 @@ void draw() {
   firstWidth=int(random(0.15*width, 0.70*width));
   firstX=firstWidth/2;
   firstY=60;
-
+  //The y position of the slab
   firstHeight=20;
   fill(0);
   rectMode(CENTER);

@@ -1,4 +1,4 @@
-class Boundary {
+public class Boundary {
   float x, y, w, h;
   Body boundary;
   Boundary(float _boundX, float _boundY, float _bWidth, float _bHeight) {
