@@ -1,34 +1,71 @@
 public class Slab {
   Boundary leftSlab;
   Boundary rightSlab;
+  Vec2 velocity = new Vec2(0, 0);
 
-  int gap;
-  int firstX, firstY, firstWidth, firstHeight; 
-  int secondStart, secondX, secondY, secondWidth, secondHeight;
-  static float distance=0; 
+  float gap, h=0.05*height; //h is the height of the slab
+  float firstX, firstY, firstWidth; 
+  float secondStart, secondX, secondY, secondWidth;
 
-  public Slab() {
+  public Slab(float yPos) {
+
+
     firstWidth=int(random(0.15*width, 0.70*width));
     firstX=firstWidth/2;
-    firstY=60;
+    firstY=yPos;
     //The y position of the slab
-    firstHeight=20;
-    leftSlab= new Boundary(firstX, firstY, firstWidth, firstHeight);
+
+    leftSlab= new Boundary(firstX, firstY, firstWidth, h);
     //The gap between the both slabs
     gap=int(0.15*width);
 
     secondStart=firstWidth+gap;
     secondWidth= width-secondStart;
-    secondHeight=20;
     secondX= secondStart+(secondWidth/2);
-    secondY=60;
-   
-  rightSlab = new Boundary(secondX, secondY, secondWidth, secondHeight);
+    secondY=yPos;
+
+    rightSlab = new Boundary(secondX, secondY, secondWidth, h);
+    didRun=true;
+  }
+  public Slab() {
+    //The gap between the both slabs
+    gap=int(0.20*width);
+
+
+    firstWidth=(width/2)-(gap/2);
+    firstX=firstWidth/2;
+    firstY=height/2;
+    //The y position of the slab
+
+    leftSlab= new Boundary(firstX, firstY, firstWidth, h);
+
+    secondStart=firstWidth+gap;
+    secondWidth= width-secondStart;
+    secondX= secondStart+(secondWidth/2);
+    secondY=height/2;
+    rightSlab = new Boundary(secondX, secondY, secondWidth, h);
+    didRun=true;
+  }
+
+  void display() {
+    background(255);
+    leftSlab.display();
+    rightSlab.display();
+  }
+  void pullDown(float yVel) {
+    velocity.y= -yVel;
+    leftSlab.setVelocity(velocity);
+    rightSlab.setVelocity(velocity);
+  }
+  float getYPosition() {
+    Vec2 leftPos;    
+    leftPos=leftSlab.getBodyPosition();  
+    return leftPos.y;
+  }
+
+  void killSlabs() {
+    leftSlab.killBoundary();
+    rightSlab.killBoundary();
+  }
 }
 
-void display() {
-  background(255);
-  leftSlab.display();
-  rightSlab.display();
-}
-}

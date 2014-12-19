@@ -8,7 +8,7 @@ public class Boundary {
     y=_boundY;
     // Build body.
     BodyDef bound = new BodyDef();
-    bound.type = BodyType.STATIC; 
+    bound.type = BodyType.KINEMATIC; 
     bound.position.set(box2d.coordPixelsToWorld(x, y));
 
     boundary = box2d.createBody(bound);
@@ -28,12 +28,21 @@ public class Boundary {
 
     boundary.createFixture(fb);
   }
+  void setVelocity(Vec2 vel) {
+    boundary.setLinearVelocity(vel);
+  }
   void display() { 
     Vec2 boxPos= box2d.getBodyPixelCoord(boundary);
     fill(0);
     stroke(0);
     rectMode(CENTER);
     rect(boxPos.x, boxPos.y, w, h);
+  }
+  Vec2 getBodyPosition() {
+    return box2d.getBodyPixelCoord(boundary);
+  }
+  void killBoundary() {
+    box2d.destroyBody(boundary);
   }
 } 
 
