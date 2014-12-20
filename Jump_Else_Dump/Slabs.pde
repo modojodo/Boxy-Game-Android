@@ -25,7 +25,6 @@ public class Slab {
     secondY=yPos;
 
     rightSlab = new Boundary(secondX, secondY, secondWidth, h);
-    didRun=true;
   }
   public Slab() {
     //The gap between the both slabs
@@ -44,11 +43,10 @@ public class Slab {
     secondX= secondStart+(secondWidth/2);
     secondY=height/2;
     rightSlab = new Boundary(secondX, secondY, secondWidth, h);
-    didRun=true;
   }
 
   void display() {
-    background(255);
+
     leftSlab.display();
     rightSlab.display();
   }
@@ -66,6 +64,11 @@ public class Slab {
   void killSlabs() {
     leftSlab.killBoundary();
     rightSlab.killBoundary();
+  }
+
+  void checkAndkill() {
+    if (getYPosition() > height+h)
+      this.killSlabs();
   }
 }
 

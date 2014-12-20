@@ -36,14 +36,14 @@ class Boxy {
     FixtureDef fd = new FixtureDef();
     fd.shape = ps;
     fd.density = 1;
-    // Set physics parameters.
+    // Set physics parameters.`
     fd.friction = 0.3;
 
 
     // Attach the Shape to the Body with the Fixture.
     body.createFixture(fd);
     //    body.setLinearVelocity(new Vec2(100, 0));
-    //    body.setAngularVelocity(0);
+    body.setAngularVelocity(0);
     jumpRight= new Vec2(xJump, yJump);
     jumpLeft= new Vec2(-xJump, yJump);
   }
@@ -68,14 +68,14 @@ class Boxy {
   float jump() {
     Vec2 boxPos = box2d.getBodyPixelCoord(body);  
 
-    if (boxPos.y<halfHeight) {
+    if (boxPos.y-(h/2)<halfHeight) {
       jumpRight.y=0;
       jumpLeft.y=0;
       jumpRight.x=0;
       jumpLeft.x=0;
-    } else if (Y_VELOCITY>=Math.abs((boxPos.y-(h/2))-halfHeight-(0.05*height))) { // subtracting the halfHeight  with the height of the slab and boxPos.y with the height of the box
-      float x = Math.abs((boxPos.y-(h/2))-(halfHeight-(0.05*height)));
-      pullDown= Math.abs(Y_VELOCITY-Math.abs((boxPos.y-h)-halfHeight));
+    } else if (Y_VELOCITY>=Math.abs((boxPos.y-(h/2))-(halfHeight+(0.05*height)))) { // subtracting the halfHeight  with the height of the slab and boxPos.y with the height of the box
+      float x =Math.abs((boxPos.y-(h/2))-(halfHeight+(0.05*height)));
+      pullDown= Math.abs(Y_VELOCITY-Math.abs((boxPos.y-(h/2))-(halfHeight+(0.05*height))));
       yJump=x;      
       jumpRight.y=yJump;
       jumpLeft.y=yJump;
@@ -87,8 +87,7 @@ class Boxy {
         body.setLinearVelocity(jumpLeft);
       }
 
-      println("jumpRight.y: "+jumpRight.y+" jumpLeft.y: "+jumpLeft.y);
-      println("box position difference with target: "+Math.abs((boxPos.y)-halfHeight));
+
       return pullDown;
     } else {
       pullDown=0;
